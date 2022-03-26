@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import Main from './Main';
 import Add from './Add';
 import Update from './Update';
+import NotFound from './NotFound';
 import styled from 'styled-components';
 
 function App() {
@@ -18,8 +19,11 @@ function App() {
         <Route path='/add'>
           <Add />
         </Route>
-        <Route path='/update'>
+        <Route path='/update/:index'>
           <Update />
+        </Route>
+        <Route>
+          <NotFound/>
         </Route>
       </Switch>
     </div>
