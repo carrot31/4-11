@@ -6,7 +6,9 @@ import Update from './Update';
 import NotFound from './NotFound';
 import styled from 'styled-components';
 
+
 function App() {
+
   return (
     <div className='App'>
       <NavBar>
@@ -36,6 +38,12 @@ const NavBar = styled.div`
   background: green;
   display: flex;
   text-align: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  left: 0;
+  right: 0;
+}
   & h1{
     /* background: yellow; */
     color: white;
