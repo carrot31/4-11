@@ -18,28 +18,32 @@ const SimpleSlider = () => {
 
   return (
     <>
-    <Title>오늘의 명언</Title>
     <Styled_Slide {...settings}>
       <div>
+        <img src="img/noeul.jpg"/>
         <h3>"Wer die Zukunft fürchtet, <br/> verdirbt sich die Gegenwart."</h3>
         <h4>미래를 두려워하는 자는 자신의 현재를 망친다.</h4>
         <h4>-Lothar Schmidt</h4>
       </div>
       <div>
+        <img src="img/scape.jpg" />
         <h3>"Der Zweck des Lebens <br/> ist das Lebenselbst."</h3>
         <h4>인생의 목적은 인생 그 자체이다.</h4>
         <h4>-Heinrich Heine</h4>
       </div>
       <div>
+        <img src="img/german.jpg" />
         <h3>"Es gibt Berge, über die man hinüber muss, <br/> Sonst geht der Weg nicht weiter."</h3>
         <h4>반드시 넘어야 할 산들이 있다. <br/> 그렇지 않으면 길은 더 이상 앞으로 나아가지 않는다.</h4>
         <h4>-Ludwig Thoma</h4>
       </div>
       <div>
+        <img src="img/arrow.jpg" />
         <h3>"Es gibt keine Grenzen, <br/> nur Möglichkeiten."</h3>
         <h4>한계란 없고, 단지 가능성만 있을 뿐이다.</h4>
       </div>
       <div>
+        <img src="img/house.jpg" />
         <h3>"Wo ein Wille ist, ist auch ein Weg.  "</h3>
         <h4>뜻이 있는 곳에 길이 있다.</h4>
       </div>
@@ -47,18 +51,13 @@ const SimpleSlider = () => {
     </>
   );
 }
-const Title = styled.h2`
-  margin-top: 120px;
-  font-family: 'OTJalollineunharuRA';
-  color: #F26565;
 
-`;
 const Styled_Slide = styled(Slider)`
 
     .slick-list{ //얘로 크기조정 했음
     	  width: 1000px;
-        height: 220px;
-        margin: 10px auto 0px auto;
+        height: 250px;
+        margin: 150px auto 80px auto;
         background: #FFF0F3; 
         border-radius: 10px;
         align-items: center;
@@ -71,14 +70,11 @@ const Styled_Slide = styled(Slider)`
     h3{
       font-style: italic;
     }
-    .slick-prev:before, .slick-next:before{ //얘는 양옆 버튼. 커스텀 해줘야 보임
-    	font-family: 'slick';
-        font-size: 70px;
-        line-height: 1;
-        opacity: .75; 
-        margin-left: 400px; 
-        color: red;
-        -webkit-font-smoothing: antialiased;
+    img{
+      width: 100%;
+      height: 500px;
+      align-items: center;
+      opacity: 0.5;
     }
 `;
 export default SimpleSlider

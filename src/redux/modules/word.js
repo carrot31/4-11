@@ -151,7 +151,7 @@ export default function reducer(state = initialState, action = {}) {
             })
             console.log('색변경완료!')
             return {list: new_word_list}
-          }
+         }
             
           case 'word/UPDATE2':{
             const new_word_list = state.list.map((a, i) => {
@@ -163,7 +163,7 @@ export default function reducer(state = initialState, action = {}) {
             })
             console.log('색재변경완료!')
             return {list: new_word_list}
-          }
+        }
 
         case 'word/REMOVE': {
             const new_word_list = state.list.filter((a, i) => {
