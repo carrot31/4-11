@@ -6,13 +6,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { deleteWordFB, updateWordFB, updateWordFB2 } from './redux/modules/word';
 import { loadWordFB } from './redux/modules/word';
 import { IoMdFlower, IoMdAddCircle } from 'react-icons/io';
-import { MdAutoFixHigh, MdDelete, MdHideSource } from 'react-icons/md';
+import { MdDelete} from 'react-icons/md';
 import { HiArrowCircleUp, HiPencilAlt } from 'react-icons/hi';
-import Slider from "react-slick";
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-
-
 
 const Main = () => {
     const history = useHistory();
@@ -24,34 +19,10 @@ const Main = () => {
         dispatch(loadWordFB());
     }, [])
 
-    const settings = {
-        arrows: false,
-        dots: true, //이동 점
-        infinite: true, //끝-처음 반복
-        slidesToShow: 1, //한화면에 보이는 개수
-        slidesToScroll: 1, //넘어가는 화면 수
-        // variableWidth: true,
-    };
 
     return (
         <>
-            {/* <Styled_Slide {...settings}>
-                <div>
-                    <h3>1</h3>
-                </div>
-                <div>
-                    <h3>2</h3>
-                </div>
-                <div>
-                    <h3>3</h3>
-                </div>
-                <div>
-                    <h3>4</h3>
-                </div>
-                <div>
-                    <h3>5</h3>
-                </div>
-            </Styled_Slide> */}
+
             <WordListBox>
                 
                 {word_list.map((a, i) => {
@@ -87,25 +58,17 @@ const Main = () => {
                     );
                 })
                 }
-            </WordListBox>
-            <Test>test모드</Test>    
+            </WordListBox>  
             <Plus><IoMdAddCircle onClick={() => history.push('/add')} /></Plus>
             <Goup><HiArrowCircleUp onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} /></Goup>
         </>
     )
 }
-// const Styled_Slide = styled(Slider)`
-	
-//     .slick-list{ //얘로 크기조정 했음
-//     	width: 400px;
-//         height: 200px;
-//         margin: 200px auto;
-//         background-color: green;
-// }`
+
 const WordListBox = styled.div`
     max-width: 88%;
     height: 100%;
-    margin: 100px auto;
+    margin: 50px auto;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -188,10 +151,5 @@ const Goup = styled.div`
     position: fixed;
     bottom: 0;
     right: 40px;
-`;
-const Test = styled.button`
-    &:active{
-        color:red;
-    }
 `;
 export default Main

@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import styled from 'styled-components';
-import { useHistory,useParams } from 'react-router-dom';
-import { useDispatch,useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { modifyWord, modifyWordFB } from './redux/modules/word';
+import Button from '@mui/material/Button';
 
-const Update = () =>{
+
+const Update = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const params = useParams();
@@ -16,13 +18,7 @@ const Update = () =>{
     const word_id = data.id
     // console.log(word_id)
 
-    // React.useEffect(() => {
-    //         if(data.word){
-    //             data.word.current.focus()
-    //         }
-    // }, []);
-
-    const [input,setInput] = useState({
+    const [input, setInput] = useState({
         word: data.word,
         explain: data.explain,
         example: data.example,
@@ -38,27 +34,29 @@ const Update = () =>{
         // console.log(value)
         dispatch(modifyWordFB(input, word_id))
     };
-    
+
 
     //useState {data.word} 실시간으로 변하는 값에 활용 해라 //onChange 활용! ; 데이터 값까지 바꿔줌 
     //useRef -> 실시간 변화x, 현재 입력된 값을 보내줄 때만 //
-    return(
-        <AddBox>
-            {/* <div>{word_list[word_index]}</div> */}
-            <h3>단어 수정하기</h3>
-            단어<input type='text' onChange={onChange} name='word' value={input.word}/>
-            설명<input type='text' onChange={onChange} name='explain' value={input.explain}  />
-            예시<input type='text' onChange={onChange} name='example' value={input.example}/>
+    return (
+        <>
+            <AddBox>
+                {/* <div>{word_list[word_index]}</div> */}
+                <h3>단어 수정하기</h3>
+                단어<input type='text' onChange={onChange} name='word' value={input.word} autoFocus />
+                설명<input type='text' onChange={onChange} name='explain' value={input.explain} />
+                예시<input type='text' onChange={onChange} name='example' value={input.example} />
 
-            <button onClick={()=>{
-                // dispatch(updateWord())
-                history.push('/');
-            }}>수정하기</button>
-        </AddBox>
+                <button onClick={() => {
+                    // dispatch(updateWord())
+                    history.push('/');
+                }}>수정하기</button>
+            </AddBox>
+        </>
     )
 }
 
-const AddBox =styled.div`
+const AddBox = styled.div`
     max-width: 400px;
     height: 500px;
     margin: 100px auto;

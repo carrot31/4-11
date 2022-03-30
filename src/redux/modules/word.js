@@ -2,7 +2,7 @@ import { async } from '@firebase/util';
 import {db} from '../../firebase';
 import {collection, getDocs, addDoc, updateDoc, doc, deleteDoc} from 'firebase/firestore';
 
-// Actions//[프젝이름/모듈명/어떤액션인지] 
+// Actions//[프젝이름/모듈명/어떤액션인지]  1) 
 const LOAD = 'word/LOAD'; //로드하기
 const CREATE = 'word/CREATE'; //생성하기
 const UPDATE = 'word/UPDATE'; //색변경하기
@@ -14,7 +14,7 @@ const initialState = {
     list: [],
 }
 
-// Action Creators //액션 객체 만들자(뭐를)
+// Action Creators //액션 객체 만들자(뭐를) 3) 
 export function loadWord(word_list) {
     console.log('로드해라!')
     return { type: LOAD, word_list }; //자바스크립트에서는 키와 벨류가 똑같다면 생략가능;; 
@@ -47,29 +47,25 @@ export function modifyWord(word){
 
 // setDocs 
 
-//미들웨어
+//미들웨어 2) 
 export const loadWordFB = () =>{
     return async function(dispatch){
       const word_data = await getDocs(collection(db,'word')); //객체정보가져와
-      // console.log(bucket_data);
   
       let word_list = [];
   
       word_data.forEach((b)=>{
         word_list.push({id: b.id, ...b.data()}) //배열로 넣어줌 
       });
-      // console.log(word_list)
+      console.log('데이터 가져와죠!')
        dispatch(loadWord(word_list))
     }
 }
+
 export const addWordFB = (word) =>{
     return function(dispatch){
-        const docRef = addDoc(collection(db,'word'),word);
-        // console.log(docRef)  
-        
-        // const word_data = {id: docRef, ...word};
-        // console.log(word_data)
-        // dispatch(createWord(word_data))
+     addDoc(collection(db,'word'),word); 
+
     }
 }
 
@@ -77,9 +73,7 @@ export const updateWordFB = (word_id) =>{
     return async function(dispatch, getState){
         const docRef = doc(db,'word',word_id);
         // console.log(docRef)
-        await updateDoc(docRef,{completed: !word_id.completed});
-        // await updateDoc(docRef,{completed: !getState().word.list.completed});
-        // await updateDoc(docRef,{completed: getState().word.list.completed? false: true})
+        await updateDoc(docRef,{completed: true});
 
         const _word_list = getState().word.list
         const word_index = _word_list.findIndex((b)=>{
@@ -104,41 +98,41 @@ export const updateWordFB2 = (word_id) =>{
         dispatch(updateWord2(word_index))
     };
 }
+
 export const deleteWordFB = (word_id) =>{
-    return function(dispatch, getState){
+    return async function(dispatch, getState){
         if(!word_id){
             window.alert('아이디가 없네요!');
             return;
-          }
-        const docRef = deleteDoc(doc(db,'word',word_id));
-        // console.log(docRef)
-        // await deleteDoc(docRef);
+          } 
+        const docRef = doc(db,'word',word_id); 
+        console.log(docRef)
+        await deleteDoc(docRef);
 
-        // const _word_list = getState().word.list
-        // const word_index = _word_list.findIndex((b)=>{
-        //     // console.log(_word_list)
-        //     return b.id === word_id; 
-        // })
-        dispatch(removeWord(docRef))
+        const _word_list = getState().word.list
+        const word_index = _word_list.findIndex((b)=>{
+            // console.log(_word_list)
+            return b.id === word_id; 
+        })
+        dispatch(removeWord(word_index))
+        
     };
 }
 
 export const modifyWordFB = (word, word_id) =>{
     return function(dispatch, getState){
-        const docRef = updateDoc(doc(db,'word',word_id),word);
-        // const docRef = doc(db,'word', word_id);
-        // await updateDoc(docRef, word);
-        // const word_index = {id: docRef, ...word};
-        // dispatch(modifyWord(word_index))
+        updateDoc(doc(db,'word',word_id),word); 
+        //firbase 정보를 바꿈으로 리덕스에 디스패치를 해주지 않아도 로드(리렌더링) 되면서 자동으로 실행!
     };
 }
 
-// Reducer
+// Reducer 4) 
 //파라미터 = {} => 기본값 설정(값이 없을 땐 빈 딕셔너리를 뱉어라)
 //: 실제로 파라미터에 아무 값이 없을 경우에 펑션을 주게되면 오류발생 => 기본값을 주자
 export default function reducer(state = initialState, action = {}) {
     switch (action.type) {      
         case 'word/LOAD': {
+            console.log(action.word_list)
             console.log('로드완료');
             return { list: action.word_list}
         }
@@ -150,7 +144,7 @@ export default function reducer(state = initialState, action = {}) {
         case 'word/UPDATE':{
             const new_word_list = state.list.map((a, i) => {
               if(parseInt(action.word_index) === i){
-                return {...a, completed: !a.completed};
+                return {...a, completed: true};
               }else{
                 return a;
               }
@@ -158,6 +152,7 @@ export default function reducer(state = initialState, action = {}) {
             console.log('색변경완료!')
             return {list: new_word_list}
           }
+            
           case 'word/UPDATE2':{
             const new_word_list = state.list.map((a, i) => {
               if(parseInt(action.word_index) === i){

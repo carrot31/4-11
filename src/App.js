@@ -6,6 +6,7 @@ import Update from './Update';
 import NotFound from './NotFound';
 import styled from 'styled-components';
 import './App.css';
+import SimpleSlider from './SimpleSlider';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       </NavBar>
       <Switch>
         <Route path='/' exact>
+          <SimpleSlider />
           <Main />
         </Route>
         <Route path='/add'>
@@ -26,11 +28,11 @@ function App() {
           <Update />
         </Route>
         <Route>
-          <NotFound/>
+          <NotFound />
         </Route>
       </Switch>
     </div>
-  ); 
+  );
 }
 
 const NavBar = styled.div`
@@ -44,12 +46,13 @@ const NavBar = styled.div`
   top: 0;
   left: 0;
   right: 0;
+  z-index: 4;
 }
   & h1{
-    color: #F08080;
+    color: #F26565;
     margin: auto;
     font-family: 'OTJalollineunharuRA';
-    /* font-weight: bolder; */
+    /* font-weight: 700; */ //웹폰트써라~~~~ 
   }
 `;
 export default App;
