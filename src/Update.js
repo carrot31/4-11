@@ -1,66 +1,54 @@
-import React from 'react';
+import React, {useState} from 'react';
+import './App.css';
 import styled from 'styled-components';
 import { useHistory,useParams } from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
-import { modifyWord } from './redux/modules/word';
+import { modifyWord, modifyWordFB } from './redux/modules/word';
 
 const Update = () =>{
     const history = useHistory();
     const dispatch = useDispatch();
     const params = useParams();
     const word_index = params.index
-    // console.log(word_index)
-
-    const word_text = React.useRef(null);
-    const word_explain = React.useRef(null);
-    const word_example = React.useRef(null);
 
     const word_list = useSelector((state) => state.word.list)
     const data = word_list[word_index]
-    // console.log(word_list[word_index])
-     
-    React.useEffect(() => {
-            if(word_text){
-                word_text.current.focus()
-            }
+    const word_id = data.id
+    // console.log(word_id)
 
-        const onClickUpdate =() =>{
+    // React.useEffect(() => {
+    //         if(data.word){
+    //             data.word.current.focus()
+    //         }
+    // }, []);
 
-        }
-    }, [word_text]);
+    const [input,setInput] = useState({
+        word: data.word,
+        explain: data.explain,
+        example: data.example,
+    });
 
-    const getData = () =>{
-        const get_text = word_text.current.value;
-        const get_explain = word_explain.current.value;
-        const get_example = word_example.current.value;
-
-
-        const word_push ={
-            get_text,
-            get_explain,
-            get_example,
-        };
-
-        return word_push;
-    }
-
-    // const modifyWord = (e) => {
-    //     e.preventDefault();
-
-    //     const word_obj = getData();
-    //     if (!word_obj) return;
+    const onChange = (e) => {
+        e.preventDefault(); // 
+        const { name, value } = e.target; //바꿀 값 지정 *event.target.name & event.target.value 줄인것(비구조화 할당)
+        setInput({
+            ...input,  //기존 값 꼭 써줘라
+            [name]: value, //name이라는 키를 가진 value
+        });
+        // console.log(value)
+        dispatch(modifyWordFB(input, word_id))
+    };
     
-    //     dispatch(modifyWord(word_obj, data));
-    //     history.push("/");
-    //   };
 
+    //useState {data.word} 실시간으로 변하는 값에 활용 해라 //onChange 활용! ; 데이터 값까지 바꿔줌 
+    //useRef -> 실시간 변화x, 현재 입력된 값을 보내줄 때만 //
     return(
         <AddBox>
             {/* <div>{word_list[word_index]}</div> */}
             <h3>단어 수정하기</h3>
-            단어<input type='text' ref={word_text} value={data.word}/>
-            설명<input type='text' ref={word_explain} value={data.explain} />
-            예시<input type='text' ref={word_example} value={data.example} />
+            단어<input type='text' onChange={onChange} name='word' value={input.word}/>
+            설명<input type='text' onChange={onChange} name='explain' value={input.explain}  />
+            예시<input type='text' onChange={onChange} name='example' value={input.example}/>
 
             <button onClick={()=>{
                 // dispatch(updateWord())
@@ -71,7 +59,7 @@ const Update = () =>{
 }
 
 const AddBox =styled.div`
-    width: 400px;
+    max-width: 400px;
     height: 500px;
     margin: 100px auto;
     display: flex;
@@ -91,7 +79,7 @@ const AddBox =styled.div`
         width: 200px;
         height: 40px;
         margin: 10px auto;
-        background: green;
+        background: #F08080;
         color: white;
         border:none;
     }

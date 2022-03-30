@@ -5,6 +5,7 @@ import Add from './Add';
 import Update from './Update';
 import NotFound from './NotFound';
 import styled from 'styled-components';
+import './App.css';
 
 
 function App() {
@@ -29,25 +30,26 @@ function App() {
         </Route>
       </Switch>
     </div>
-  );
+  ); 
 }
 
 const NavBar = styled.div`
   width: 100%;
   height: 80px;
-  background: green;
+  background: white;
   display: flex;
   text-align: center;
+  border-bottom: 1px solid #F08080;
   position: fixed;
   top: 0;
-  width: 100%;
   left: 0;
   right: 0;
 }
   & h1{
-    /* background: yellow; */
-    color: white;
+    color: #F08080;
     margin: auto;
+    font-family: 'OTJalollineunharuRA';
+    /* font-weight: bolder; */
   }
 `;
 export default App;

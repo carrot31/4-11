@@ -1,11 +1,12 @@
 import React from 'react';
+import './App.css';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
 import { addWordFB, createWord } from './redux/modules/word';
 
 const Add = (props) =>{
-    console.log(props)
+    // console.log(props)
     const history = useHistory();
     const dispatch = useDispatch();
     
@@ -18,12 +19,10 @@ const Add = (props) =>{
     // console.log(word_list)
 
 
-
-
     React.useEffect(() => {
         if(word_text){
             word_text.current.focus()
-        }
+        }       
         
         const press=(e)=>{
             if(e.key === 'Enter'){
@@ -63,7 +62,7 @@ const Add = (props) =>{
 }
 
 const AddBox =styled.div`
-    width: 400px;
+    max-width: 400px;
     height: 500px;
     margin: 100px auto;
     display: flex;
@@ -84,7 +83,7 @@ const AddBox =styled.div`
         width: 200px;
         height: 40px;
         margin: 10px auto;
-        background: green;
+        background: #F08080;
         color: white;
         border:none;
     }
