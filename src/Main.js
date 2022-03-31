@@ -33,9 +33,6 @@ const Main = () => {
                                     onClick={() => {
                                         dispatch(updateWordFB(word_list[i].id)) 
                                     }} //로드에서 데이터 가져올 때 미들웨어에서 이미 id를 넣어줫으므로 .id만 해주면 id값이 넘어감
-                                    onDoubleClick={() => {
-                                        dispatch(updateWordFB2(word_list[i].id))
-                                    }}
                                 >완료</IoMdFlower>
                                 <HiPencilAlt className='modify'
                                     onClick={() => {

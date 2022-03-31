@@ -6,7 +6,6 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
 const LOAD = 'word/LOAD'; //로드하기
 const CREATE = 'word/CREATE'; //생성하기
 const UPDATE = 'word/UPDATE'; //색변경하기
-const UPDATE2 = 'word/UPDATE2'; //색변경하기
 const REMOVE = 'word/REMOVE'; //제거하기
 const MODIFY = 'word/MODIFY'; //수정하기
 
@@ -28,11 +27,6 @@ export function createWord(word) {
 export function updateWord(word_index) { //word가 몇 번째 인자인가
     console.log('색변경해라!')
     return { type: UPDATE, word_index };
-}
-
-export function updateWord2(word_index) {
-    console.log('색변경해라!')
-    return { type: UPDATE2, word_index };
 }
 
 export function removeWord(word_index) {
@@ -73,31 +67,16 @@ export const addWordFB = (word) => { //word: 새롭게 추가해 줄 값 //받�
 
 export const updateWordFB = (word_id) => { //아이디만 받아오자
     return async function (dispatch, getState) {
-        const docRef = doc(db, 'word', word_id); //어떤걸 바꿔줄 것인가? 아이디값에 해당하는 애 
-        // console.log(docRef)
-        await updateDoc(docRef, { completed: true }); //(뭘 바꿔줄꺼니?, 어떻게 바꿔줄거니?)
         //--------------------------------------------------------------------------------------------리덕스도 바꿔주자! 
         const _word_list = getState().word.list //firebase 모든 값을 가져옴 
         const word_index = _word_list.findIndex((b) => {
             // console.log(_word_list)
             return b.id === word_id; //모든 리스트 안에서 바꾸고자 하는 단어의 id와 일치하는 것을 찾아라. 
         })
+        if(getState().word.list[word_index].completed === false){
+            await updateDoc(doc(db, 'word', word_id),{completed: true});
+        }else{await updateDoc(doc(db, 'word', word_id),{completed: false});}
         dispatch(updateWord(word_index))
-    };
-}
-
-export const updateWordFB2 = (word_id) => {
-    return async function (dispatch, getState) {
-        const docRef = doc(db, 'word', word_id);
-        // console.log(docRef)
-        await updateDoc(docRef, { completed: false });
-
-        const _word_list = getState().word.list
-        const word_index = _word_list.findIndex((b)=>{
-            // console.log(_word_list)
-            return b.id === word_id; //모든 리스트 안에서 바꾸고자 하는 단어의 id와 일치하는 것을 찾아라. 
-        })  
-        dispatch(updateWord2(word_index)) 
     };
 }
 
@@ -145,24 +124,12 @@ export default function reducer(state = initialState, action = {}) {
         case 'word/UPDATE': {
             const new_word_list = state.list.map((a, i) => {
                 if (action.word_index == i) {
-                    return { ...a, completed: true };
+                    return { ...a, completed: !a.completed};
                 } else {
                     return a;
                 }
             })
             console.log('색변경완료!')
-            return { list: new_word_list }
-        }
-
-        case 'word/UPDATE2': {
-            const new_word_list = state.list.map((a, i) => {
-                if (action.word_index == i) {
-                    return { ...a, completed: false };
-                } else {
-                    return a;
-                }
-            })
-            console.log('색재변경완료!')
             return { list: new_word_list }
         }
 
