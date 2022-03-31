@@ -19,21 +19,20 @@ const Main = () => {
         dispatch(loadWordFB());
     }, [])
 
-
+//key 값은 아이디 값으로 넣자!!!! 인덱스 넣지마!~!~!~!
     return (
         <>
 
             <WordListBox>
                 
                 {word_list.map((a, i) => {
-                    // console.log(a)
                     return (
-                        <Word className='WordList' completed={a.completed} keys={i} >
+                        <Word className='WordList' completed={a.completed} key={a.id}>  
                             <ButtonBox completed={a.completed}>
                                 <IoMdFlower className='done'
                                     onClick={() => {
                                         dispatch(updateWordFB(word_list[i].id)) 
-                                    }} //로드에서 데이터 가져올 때 이미 id를 넣어줫으므로 .id만 해주면 id값이 넘어감
+                                    }} //로드에서 데이터 가져올 때 미들웨어에서 이미 id를 넣어줫으므로 .id만 해주면 id값이 넘어감
                                     onDoubleClick={() => {
                                         dispatch(updateWordFB2(word_list[i].id))
                                     }}

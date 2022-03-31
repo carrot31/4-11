@@ -25,15 +25,16 @@ const Update = () => {
     });
 
     const onChange = (e) => {
-        e.preventDefault(); // 
+        // e.preventDefault(); //issue 물어보기~~~~~~
         const { name, value } = e.target; //바꿀 값 지정 *event.target.name & event.target.value 줄인것(비구조화 할당)
         setInput({
             ...input,  //기존 값 꼭 써줘라
             [name]: value, //name이라는 키를 가진 value
-        });
-        // console.log(value)
-        dispatch(modifyWordFB(input, word_list[word_index].id)) //state와 아이디값 넘겨줌
+        });  
+         //state와 아이디값 넘겨줌
     };
+    dispatch(modifyWordFB(input, word_list[word_index].id))
+    console.log(input)//scope 확인!!!!!
 
 
     //useState {data.word} 실시간으로 변하는 값에 활용 해라 //onChange 활용! ; 데이터 값까지 바꿔줌 
