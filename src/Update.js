@@ -22,10 +22,10 @@ const Update = () => {
     });
     // console.log(input)
 
-    
+
 
     const onChange = (e) => {
-        // e.preventDefault(); //issue 물어보기! 
+        e.preventDefault(); //issue 물어보기! 
         const { name, value } = e.target; //바꿀 값 지정 *event.target.name & event.target.value 줄인것(비구조화 할당)
         setInputs({
             ...inputs,  //기존 값 꼭 써줘라

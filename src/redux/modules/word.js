@@ -67,7 +67,6 @@ export const addWordFB = (word) => { //word: 새롭게 추가해 줄 값 //받�
 
 export const updateWordFB = (word_id) => { //아이디만 받아오자
     return async function (dispatch, getState) {
-        //--------------------------------------------------------------------------------------------리덕스도 바꿔주자! 
         const _word_list = getState().word.list //firebase 모든 값을 가져옴 
         const word_index = _word_list.findIndex((b) => {
             // console.log(_word_list)

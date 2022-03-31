@@ -38,7 +38,7 @@ const Main = () => {
                                     onClick={() => {
                                         history.push('/update/' + i)
                                     }}>수정</HiPencilAlt>
-                                <MdDelete className='remove'
+                                <MdDelete className='remove' key={a.id}
                                     onClick={() => {
                                         // dispatch(removeWord(i))
                                         dispatch(deleteWordFB(word_list[i].id))
