@@ -19,30 +19,30 @@ const SimpleSlider = () => {
   return (
     <>
     <Styled_Slide {...settings}>
-      <div>
+      <div className='card1'>
         <img src="img/noeul.jpg"/>
         <h3>"Wer die Zukunft fürchtet, <br/> verdirbt sich die Gegenwart."</h3>
         <h4>미래를 두려워하는 자는 자신의 현재를 망친다.</h4>
         <h4>-Lothar Schmidt</h4>
       </div>
-      <div>
+      <div className='card2'>
         <img src="img/scape.jpg" />
         <h3>"Der Zweck des Lebens <br/> ist das Lebenselbst."</h3>
         <h4>인생의 목적은 인생 그 자체이다.</h4>
         <h4>-Heinrich Heine</h4>
       </div>
-      <div>
+      <div className='card3'>
         <img src="img/german.jpg" />
         <h3>"Es gibt Berge, über die man hinüber muss, <br/> Sonst geht der Weg nicht weiter."</h3>
         <h4>반드시 넘어야 할 산들이 있다. <br/> 그렇지 않으면 길은 더 이상 앞으로 나아가지 않는다.</h4>
         <h4>-Ludwig Thoma</h4>
       </div>
-      <div>
+      <div className='card4'>
         <img src="img/arrow.jpg" />
         <h3>"Es gibt keine Grenzen, <br/> nur Möglichkeiten."</h3>
         <h4>한계란 없고, 단지 가능성만 있을 뿐이다.</h4>
       </div>
-      <div>
+      <div className='card5'>
         <img src="img/house.jpg" />
         <h3>"Wo ein Wille ist, ist auch ein Weg.  "</h3>
         <h4>뜻이 있는 곳에 길이 있다.</h4>
@@ -54,27 +54,30 @@ const SimpleSlider = () => {
 
 const Styled_Slide = styled(Slider)`
 
-    .slick-list{ //얘로 크기조정 했음
-    	  width: 1000px;
+    .slick-list{ //얘로 크기조정 
+    	  max-width: 1000px;
         height: 250px;
-        margin: 150px auto 80px auto;
+        margin: 130px auto 80px auto;
         background: #FFF0F3; 
         border-radius: 10px;
         align-items: center;
-        font-family: 'OTJalollineunharuRA';
+        font-family: 'Jal_Haru';
         font-size: 20px;
     }
     div{
-      margin-top: 3px;
+      position: relative; //사진 위에 글씨 덮을 때, div는 realtive, 이미지는 absolute
     }
-    h3{
+    h3, h4{
+      margin-top: 35px;
       font-style: italic;
     }
     img{
       width: 100%;
       height: 500px;
       align-items: center;
-      opacity: 0.5;
-    }
+      position: absolute;
+      opacity: 0.3 ;
+    } 
 `;
+
 export default SimpleSlider

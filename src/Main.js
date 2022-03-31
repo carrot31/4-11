@@ -32,8 +32,8 @@ const Main = () => {
                             <ButtonBox completed={a.completed}>
                                 <IoMdFlower className='done'
                                     onClick={() => {
-                                        dispatch(updateWordFB(word_list[i].id))
-                                    }}
+                                        dispatch(updateWordFB(word_list[i].id)) 
+                                    }} //로드에서 데이터 가져올 때 이미 id를 넣어줫으므로 .id만 해주면 id값이 넘어감
                                     onDoubleClick={() => {
                                         dispatch(updateWordFB2(word_list[i].id))
                                     }}
@@ -112,7 +112,7 @@ const ButtonBox = styled.div`
     }
 `;
 const ContentWord = styled.div`
-    font-family: 'OTJalollineunharuRA';
+    font-family: 'Jal_Haru';
     font-size: 30px;
     margin-bottom: 15px;
     margin-left: 5px;
@@ -120,22 +120,17 @@ const ContentWord = styled.div`
    
 `;
 const Contentexplain = styled.div`
-    font-family: 'OTJalollineunharuRA';
+    font-family: 'Jal_Haru';
     font-size: 18px;
     margin-bottom: 8px;
     margin-left: 5px;
-    /* opacity: 0;
-    &:hover{
-        opacity:1;
-    } */
 `;
 const Contentex = styled.div`
     display: flex;
     color: ${(props) => props.completed ? 'white' : 'blue'};
-    font-family: 'OTJalollineunharuRA';
+    font-family: 'Jal_Haru';
     font-size: 18px;
     margin-left: 5px;
-
 `;
 const Plus = styled.div`
     font-size: 50px;

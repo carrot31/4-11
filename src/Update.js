@@ -3,8 +3,7 @@ import './App.css';
 import styled from 'styled-components';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { modifyWord, modifyWordFB } from './redux/modules/word';
-import Button from '@mui/material/Button';
+import { modifyWordFB } from './redux/modules/word';
 
 
 const Update = () => {
@@ -15,10 +14,11 @@ const Update = () => {
 
     const word_list = useSelector((state) => state.word.list)
     const data = word_list[word_index]
-    const word_id = data.id
+    // const word_id = data.id
     // console.log(word_id)
 
     const [input, setInput] = useState({
+        id: data.id,
         word: data.word,
         explain: data.explain,
         example: data.example,
@@ -32,7 +32,7 @@ const Update = () => {
             [name]: value, //name이라는 키를 가진 value
         });
         // console.log(value)
-        dispatch(modifyWordFB(input, word_id))
+        dispatch(modifyWordFB(input, word_list[word_index].id)) //state와 아이디값 넘겨줌
     };
 
 
@@ -48,7 +48,6 @@ const Update = () => {
                 예시<input type='text' onChange={onChange} name='example' value={input.example} />
 
                 <button onClick={() => {
-                    // dispatch(updateWord())
                     history.push('/');
                 }}>수정하기</button>
             </AddBox>
@@ -62,6 +61,8 @@ const AddBox = styled.div`
     margin: 100px auto;
     display: flex;
     flex-direction: column;
+    font-family: 'Jal_Haru';
+    text-align: left;
     & h3{
         text-align: center;
     }
@@ -71,6 +72,7 @@ const AddBox = styled.div`
         border-left: none;
         margin-bottom: 10px;
         padding:8px;
+        font-family: 'Jal_Haru';
 
     }
     & button{
@@ -80,6 +82,7 @@ const AddBox = styled.div`
         background: #F08080;
         color: white;
         border:none;
+        font-family: 'Jal_Haru';
     }
     & button:hover{
         box-shadow: 0px 0px 5px 0px gray;

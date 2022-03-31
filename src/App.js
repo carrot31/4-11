@@ -51,8 +51,7 @@ const NavBar = styled.div`
   & h1{
     color: #F26565;
     margin: auto;
-    font-family: 'OTJalollineunharuRA';
-    /* font-weight: 700; */ //웹폰트써라~~~~ 
+    font-family: 'Jal_Haru';
   }
 `;
 export default App;

@@ -3,7 +3,7 @@ import './App.css';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
-import { addWordFB, createWord } from './redux/modules/word';
+import { createWord, addWordFB} from './redux/modules/word';
 
 const Add = (props) =>{
     // console.log(props)
@@ -36,12 +36,6 @@ const Add = (props) =>{
         return () => window.removeEventListener("keydown", press);
     }, []); //빈배열은 첫 렌더링 완료 후에만 실행한다! 
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        alert(`모두 입력해주세요!`);
-      };
-
-
     return(
         <AddBox>
             <h3>단어 추가하기</h3>
@@ -50,7 +44,6 @@ const Add = (props) =>{
             예시<input type='text' ref={word_example}/>
 
             <button onClick={()=>{
-                // handleSubmit()
                 // dispatch(createWord(
                 //     {word:word_text.current.value, explain:word_explain.current.value, example: word_example.current.value}
                 // ));
@@ -67,7 +60,8 @@ const AddBox =styled.div`
     margin: 100px auto;
     display: flex;
     flex-direction: column;
-    /* border: 1px solid gray; */
+    text-align: left;
+    font-family: 'Jal_Haru';
     & h3{
         text-align: center;
     }
@@ -77,7 +71,6 @@ const AddBox =styled.div`
         border-left: none;
         margin-bottom: 10px;
         padding:8px;
-
     }
     & button{
         width: 200px;
@@ -86,6 +79,7 @@ const AddBox =styled.div`
         background: #F08080;
         color: white;
         border:none;
+        font-family: 'Jal_Haru';
     }
     & button:hover{
         box-shadow: 0px 0px 5px 0px gray;
