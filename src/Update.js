@@ -14,27 +14,27 @@ const Update = () => {
 
     const word_list = useSelector((state) => state.word.list)
     const data = word_list[word_index]
-    // const word_id = data.id
-    // console.log(word_id)
 
-    const [input, setInput] = useState({
-        id: data.id,
+    const [inputs, setInputs] = useState({
         word: data.word,
         explain: data.explain,
         example: data.example,
     });
+    // console.log(input)
+
+    
 
     const onChange = (e) => {
-        // e.preventDefault(); //issue 물어보기~~~~~~
+        // e.preventDefault(); //issue 물어보기! 
         const { name, value } = e.target; //바꿀 값 지정 *event.target.name & event.target.value 줄인것(비구조화 할당)
-        setInput({
-            ...input,  //기존 값 꼭 써줘라
-            [name]: value, //name이라는 키를 가진 value
+        setInputs({
+            ...inputs,  //기존 값 꼭 써줘라
+            [name]: value, //[name] : input태그에 지정해준 name값, value: input태그에 입력된 값 => [name]키에 해당하는 value값을 넣어라 
         });  
          //state와 아이디값 넘겨줌
     };
-    dispatch(modifyWordFB(input, word_list[word_index].id))
-    console.log(input)//scope 확인!!!!!
+    dispatch(modifyWordFB(inputs, word_list[word_index].id))
+    // console.log(input)
 
 
     //useState {data.word} 실시간으로 변하는 값에 활용 해라 //onChange 활용! ; 데이터 값까지 바꿔줌 
@@ -44,9 +44,9 @@ const Update = () => {
             <AddBox>
                 {/* <div>{word_list[word_index]}</div> */}
                 <h3>단어 수정하기</h3>
-                단어<input type='text' onChange={onChange} name='word' value={input.word} autoFocus />
-                설명<input type='text' onChange={onChange} name='explain' value={input.explain} />
-                예시<input type='text' onChange={onChange} name='example' value={input.example} />
+                단어<input type='text' onChange={onChange} name='word' value={inputs.word} autoFocus />
+                설명<input type='text' onChange={onChange} name='explain' value={inputs.explain} />
+                예시<input type='text' onChange={onChange} name='example' value={inputs.example} />
 
                 <button onClick={() => {
                     history.push('/');
