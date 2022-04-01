@@ -14,6 +14,9 @@ const Update = () => {
 
     const word_list = useSelector((state) => state.word.list)
     const data = word_list[word_index]
+    console.log(word_list)
+
+    // const wordlist = store.getState()
 
     const [inputs, setInputs] = useState({
         word: data.word,

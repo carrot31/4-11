@@ -13,7 +13,7 @@ const Main = () => {
     const history = useHistory();
     const word_list = useSelector((state) => state.word.list)
     const dispatch = useDispatch();
-    // console.log(...word_list)
+    console.log(word_list)
 
     React.useEffect(() => {
         dispatch(loadWordFB());

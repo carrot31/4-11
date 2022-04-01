@@ -140,11 +140,11 @@ export default function reducer(state = initialState, action = {}) {
             console.log('제거완료!!')
             return { list: new_word_list }
         }
-        case "word/MODIFY":
+        case "word/MODIFY":{
             const new_word_list = [...state.list, action.word]
             console.log('수정완료!')
             return { list: new_word_list };
-
+        }      
         default: return state;
-    }
+        }
 }
